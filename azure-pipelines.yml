@@ -15,7 +15,7 @@ variables:
 
 steps:
 - script: |
-           docker run --tty --volume $(localdir):/tf --workdir /tf bridgecrew/checkov --directory /tf
+           docker run --tty --volume $(System.DefaultWorkingDirectory):/tf --workdir /tf bridgecrew/checkov --directory /tf
   displayName: "static code analysis"
 - task: CopyFiles@2
   inputs:
