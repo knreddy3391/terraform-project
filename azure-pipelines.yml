@@ -9,7 +9,14 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+- name: localdir
+  value: $(build.artifactstagingdirectory)
+
 steps:
+- script: |
+           docker run --tty --volume $(localdir):/tf --workdir /tf bridgecrew/checkov --directory /tf
+  displayName: "static code analysis"
 - task: CopyFiles@2
   inputs:
     Contents: '*.tf'
